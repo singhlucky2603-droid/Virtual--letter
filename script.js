@@ -304,6 +304,31 @@ function loadDraft() {
 }
 
 loadDraft();
+const params = new URLSearchParams(window.location.search);
+
+if (params.get("data")) {
+
+    try {
+
+        const data = JSON.parse(
+            decodeURIComponent(
+                atob(params.get("data"))
+            )
+        );
+
+        senderName.value = data.sender || "";
+        receiverName.value = data.receiver || "";
+        letterTitle.value = data.title || "";
+        letterMessage.value = data.message || "";
+        themeSelector.value = data.theme || "love";
+
+        updatePreview();
+
+    } catch (e) {
+        console.log("Invalid shared letter");
+    }
+
+}
 
 // ===============================
 // SAVE BUTTON
@@ -336,25 +361,31 @@ setInterval(() => {
 // COPY SHARE LINK
 // ===============================
 
-copyLinkBtn.addEventListener(
-    "click",
-    () => {
+copyLinkBtn.addEventListener("click", () => {
 
-        const uniqueLink =
-            window.location.href +
-            "?letter=" +
-            Date.now();
+    const data = {
+        sender: senderName.value,
+        receiver: receiverName.value,
+        title: letterTitle.value,
+        message: letterMessage.value,
+        theme: themeSelector.value
+    };
 
-        navigator.clipboard.writeText(
-            uniqueLink
-        );
+    const encoded = btoa(
+        encodeURIComponent(JSON.stringify(data))
+    );
 
-        alert(
-            "Link copied successfully!"
-        );
+    const shareLink =
+        window.location.origin +
+        window.location.pathname +
+        "?data=" +
+        encoded;
 
-    }
-);
+    navigator.clipboard.writeText(shareLink);
+
+    alert("Letter link copied successfully ❤️");
+
+});
 
 // ===============================
 // SHARE BUTTONS
