@@ -324,6 +324,18 @@ if (params.get("data")) {
 
         updatePreview();
 
+        // Hide creator panel when opening shared link
+        const creatorSection =
+            document.querySelector(".creator-section") ||
+            document.querySelector(".left-panel") ||
+            document.querySelector(".creator-container");
+
+        if (creatorSection) {
+            creatorSection.style.display = "none";
+        }
+
+        document.body.classList.add("shared-view");
+
     } catch (e) {
         console.log("Invalid shared letter");
     }
