@@ -386,74 +386,79 @@ copyLinkBtn.addEventListener("click", () => {
     alert("Letter link copied successfully ❤️");
 
 });
-
 // ===============================
 // SHARE BUTTONS
 // ===============================
 
-function getShareText() {
+function generateShareLink() {
 
-    return encodeURIComponent(
-        `${letterTitle.value}
+    const data = {
+        sender: senderName.value,
+        receiver: receiverName.value,
+        title: letterTitle.value,
+        message: letterMessage.value,
+        theme: themeSelector.value
+    };
 
-${letterMessage.value}
-
-💌 Virtual Letter`
+    const encoded = btoa(
+        encodeURIComponent(
+            JSON.stringify(data)
+        )
     );
 
+    return (
+        window.location.origin +
+        window.location.pathname +
+        "?data=" +
+        encoded
+    );
 }
 
 // WhatsApp
 
-whatsappBtn.addEventListener(
-    "click",
-    () => {
+whatsappBtn.addEventListener("click", () => {
 
-        window.open(
-            `https://wa.me/?text=${getShareText()}`
-        );
+    const shareLink = generateShareLink();
 
-    }
-);
+    window.open(
+        `https://wa.me/?text=${encodeURIComponent(shareLink)}`
+    );
+
+});
 
 // Facebook
 
-facebookBtn.addEventListener(
-    "click",
-    () => {
+facebookBtn.addEventListener("click", () => {
 
-        window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`
-        );
+    const shareLink = generateShareLink();
 
-    }
-);
+    window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLink)}`
+    );
+
+});
 
 // Telegram
 
-telegramBtn.addEventListener(
-    "click",
-    () => {
+telegramBtn.addEventListener("click", () => {
 
-        window.open(
-            `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${getShareText()}`
-        );
+    const shareLink = generateShareLink();
 
-    }
-);
+    window.open(
+        `https://t.me/share/url?url=${encodeURIComponent(shareLink)}`
+    );
+
+});
 
 // Instagram
 
-instagramBtn.addEventListener(
-    "click",
-    () => {
+instagramBtn.addEventListener("click", () => {
 
-        alert(
-            "Instagram does not support direct web sharing. Download the letter and upload it manually."
-        );
+    alert(
+        "Instagram does not support direct web sharing. Download the letter and upload manually."
+    );
 
-    }
-);
+});
 
 // ===============================
 // DOWNLOAD IMAGE
