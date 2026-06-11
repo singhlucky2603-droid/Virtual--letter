@@ -326,15 +326,34 @@ if (params.get("data")) {
         updatePreview();
 
         // Directly scroll to letter section
-        window.location.hash = "creator";
+        updatePreview();
 
-    } catch (e) {
+// Shared link se aaya ho to letter automatically open karo
 
-        console.log("Invalid shared letter");
+setTimeout(() => {
 
+    envelope.classList.add("open");
+
+    const letterCard =
+        document.querySelector(".letter-card");
+
+    if (letterCard) {
+        letterCard.scrollIntoView({
+            behavior: "smooth"
+        });
     }
 
+}, 500);
+
+} catch (e) {
+
+    console.log("Invalid shared letter");
+
 }
+   
+
+
+    
 // COPY SHARE LINK
 // ===============================
 
