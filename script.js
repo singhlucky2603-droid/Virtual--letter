@@ -304,6 +304,7 @@ function loadDraft() {
 }
 
 loadDraft();
+
 const params = new URLSearchParams(window.location.search);
 
 if (params.get("data")) {
@@ -324,52 +325,16 @@ if (params.get("data")) {
 
         updatePreview();
 
-        // Hide creator panel when opening shared link
-        const creatorSection =
-            document.querySelector(".creator-section") ||
-            document.querySelector(".left-panel") ||
-            document.querySelector(".creator-container");
-
-        if (creatorSection) {
-            creatorSection.style.display = "none";
-        }
-
-        document.body.classList.add("shared-view");
+        // Directly scroll to letter section
+        window.location.hash = "creator";
 
     } catch (e) {
+
         console.log("Invalid shared letter");
+
     }
 
 }
-
-// ===============================
-// SAVE BUTTON
-// ===============================
-
-saveDraftBtn.addEventListener(
-    "click",
-    () => {
-
-        saveToLocalStorage();
-
-        alert(
-            "Draft saved successfully ❤️"
-        );
-
-    }
-);
-
-// ===============================
-// AUTO SAVE
-// ===============================
-
-setInterval(() => {
-
-    saveToLocalStorage();
-
-}, 5000);
-
-// ===============================
 // COPY SHARE LINK
 // ===============================
 
