@@ -325,7 +325,10 @@ if (params.get("data")) {
         updatePreview();
 // Shared link mode
 document.querySelector(".hero")?.remove();
-
+document.querySelector(".editor")?.style.setProperty(
+    "display",
+    "none"
+);
 const creatorSection =
     document.getElementById("creator");
 
