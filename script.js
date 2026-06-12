@@ -299,8 +299,7 @@ function loadDraft() {
         draft.theme || "love"
     );
 
-    updatePreview();
-
+    
 }
 
 loadDraft();
@@ -324,7 +323,17 @@ if (params.get("data")) {
         themeSelector.value = data.theme || "love";
 
         updatePreview();
+// Shared link mode
+document.querySelector(".hero")?.remove();
 
+const creatorSection =
+    document.getElementById("creator");
+
+if (creatorSection) {
+    creatorSection.scrollIntoView({
+        behavior: "smooth"
+    });
+}
         // Directly scroll to letter section
 
 // Shared link se aaya ho to letter automatically open karo
