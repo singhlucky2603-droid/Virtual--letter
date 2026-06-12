@@ -326,7 +326,6 @@ if (params.get("data")) {
         updatePreview();
 
         // Directly scroll to letter section
-        updatePreview();
 
 // Shared link se aaya ho to letter automatically open karo
 
@@ -351,7 +350,7 @@ setTimeout(() => {
 
 }
    
-
+}
 
     
 // COPY SHARE LINK
